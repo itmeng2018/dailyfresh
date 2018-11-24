@@ -132,7 +132,6 @@ EMAIL_HOST_PASSWORD = 'itmeng2018'
 # 收件人看到的发件人
 EMAIL_FROM = '天天生鲜<m19937427455@163.com>'
 
-
 # Django的缓存配置
 CACHES = {
     "default": {
@@ -147,3 +146,6 @@ CACHES = {
 # 配置session存储
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
+
+# 配置登录url地址
+LOGIN_URL = '/user/login/'
