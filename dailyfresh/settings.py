@@ -40,10 +40,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',  # 富文本编辑器
-    'apps.user',  # 用户模块
-    'apps.cart',  # 购物车模块
-    'apps.order',  # 订单模块
-    'apps.goods',  # 商品模块
+    'user',  # 用户模块
+    'cart',  # 购物车模块
+    'order',  # 订单模块
+    'goods',  # 商品模块
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dailyfresh',
-        'HOST': '127.0.0.1',
+        'HOST': '139.196.137.234',
         'USER': 'root',
         'PASSWORD': 'mengfei',
         'PORT': 3306,
@@ -119,3 +119,31 @@ TINYMCE_DEFAULT_CONFIG = {
     'width': 600,
     'height': 400,
 }
+
+# 发送邮件配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# 发邮件的smtp服务器地址
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+# 发送邮件的邮箱
+EMAIL_HOST_USER = 'm19937427455@163.com'
+# 在邮箱中设置客户端的授权码
+EMAIL_HOST_PASSWORD = 'itmeng2018'
+# 收件人看到的发件人
+EMAIL_FROM = '天天生鲜<m19937427455@163.com>'
+
+
+# Django的缓存配置
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://139.196.137.234:6379/9",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+# 配置session存储
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
