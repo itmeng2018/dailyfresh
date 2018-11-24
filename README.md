@@ -2,7 +2,7 @@
 
 ### 一. 项目架构
 
-![项目架构](/Users/yanmengfei/Desktop/项目架构.png)
+![项目架构](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/项目架构.png)
 
 ### 二. 模块设计
 
@@ -14,17 +14,17 @@
 
 ### 三. 数据库设计
 
-![数据库设计-大](/Users/yanmengfei/Desktop/数据库设计-大.png)
+![数据库设计-大](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/数据库设计-大.png)
 
-![数据库设计](/Users/yanmengfei/Desktop/数据库设计.png)
+![数据库设计](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/数据库设计.png)
 
 ### 四. 页面设计
 
-![页面设计](/Users/yanmengfei/Desktop/页面设计.png)
+![页面设计](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/页面设计.png)
 
 ### 五. 功能设计
 
-![功能设计](/Users/yanmengfei/Desktop/功能设计.png)
+![功能设计](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/功能设计.png)
 
 ### 六. 开发环境
 
