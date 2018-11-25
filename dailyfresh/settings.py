@@ -80,11 +80,24 @@ WSGI_APPLICATION = 'dailyfresh.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# 服务器
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'dailyfresh',
+#         'HOST': '139.196.137.234',
+#         'USER': 'root',
+#         'PASSWORD': 'mengfei',
+#         'PORT': 3306,
+#     }
+# }
+
+# 本机
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dailyfresh',
-        'HOST': '139.196.137.234',
+        'HOST': '127.0.0.1',
         'USER': 'root',
         'PASSWORD': 'mengfei',
         'PORT': 3306,

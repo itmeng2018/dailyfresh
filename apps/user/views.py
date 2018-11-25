@@ -6,8 +6,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from django.http import HttpResponse
 from django.conf import settings
+from django_redis import get_redis_connection
 
 from user.models import User, Address
+from goods.models import GoodsSKU
 from celery_tasks.tasks import send_register_active_email
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
@@ -58,8 +60,7 @@ class RegisterView(View):
         user.is_active = 0
         user.save()
 
-        # 发送激活邮件，包含激活链接: http://127.0.0.1:8000/user/active/3
-        # 激活链接中需要包含用户的身份信息, 并且要把身份信息进行加密
+        # 发送激活邮件，包含激活链接: http://127.0.0.1:8000/user/active/(user_id_token)
 
         # 加密用户的身份信息，生成激活token
         serializer = Serializer(settings.SECRET_KEY, 3600)
@@ -167,7 +168,7 @@ class LogoutView(View):
         '''
         退出登录
         :param request:
-        :return:
+        :return: 首页
         '''
         # 登出用户 - 清除用户的session信息
         logout(request)
@@ -183,13 +184,33 @@ class UserInfoView(LoginRequiredMixin, View):
         '''
         显示
         :param request:
-        :return:
+        :return: 用户信息页
         '''
-        # 获取用户的个人信息
+        # 用户个人信息展示
+        user = request.user
+        address = Address.objects.get_default_address(user)
+
+        # 用户历史浏览记录展示  -- 使用redis存储(user_id:list)
+        # 使用setting中的redis.default配置创建StrictRedis()的实例对象
+        con = get_redis_connection("default")
 
         # 获取用户的历史浏览记录
+        history_key = 'history_%d' % user.id
 
-        return render(request, 'user_center_info.html', {'page': 'user'})
+        # 获取用户最近浏览的5条商品id
+        sku_ids = con.lrange(history_key, 0, 4)
+
+        # 遍历获取ids, 单个进行数据库查询,避免数据库查询的id自动升序问题与浏览顺序冲突问题
+        goods_list = [GoodsSKU.objects.get(id=i) for i in sku_ids]
+
+        # 组织上下文
+        context = {
+            'page': 'user',
+            'address': address,
+            'goods_list': goods_list,
+        }
+
+        return render(request, 'user_center_info.html', context)
 
 
 # /user/order/
@@ -200,7 +221,7 @@ class UserOrderView(LoginRequiredMixin, View):
         '''
         显示
         :param request:
-        :return:
+        :return: 用户订单页
         '''
         # 获取用户的订单信息
 
@@ -215,15 +236,13 @@ class AddressView(LoginRequiredMixin, View):
         '''
         显示
         :param request:
-        :return:
+        :return: 用户地址页
         '''
         # 获取用户的默认收货地址
         user = request.user  # 获取登录用户对应的用户对象
-        try:
-            address = Address.objects.get(user=user, is_default=True)
-        except Address.DoesNotExist:
-            # 不存在默认收货地址
-            address = None
+
+        # 查到返回地址, 查不到返回None
+        address = Address.objects.get_default_address(user)
 
         # 使用模板
         return render(request, 'user_center_site.html', {'page': 'address', 'address': address})
@@ -259,6 +278,7 @@ class AddressView(LoginRequiredMixin, View):
             user=user,
             receiver=receiver,
             addr=addr,
+            phone=phone,
             zip_code=zip_code,
             is_default=is_default
         )
