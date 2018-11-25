@@ -34,7 +34,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -77,10 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dailyfresh.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-# 服务器
+# TODO 数据库
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -103,7 +99,6 @@ DATABASES = {
         'PORT': 3306,
     }
 }
-
 
 # django 认证系统使用的模型类
 AUTH_USER_MODEL = 'user.User'
@@ -134,6 +129,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'height': 400,
 }
 
+# TODO 邮箱配置
 # 发送邮件配置
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # 发邮件的smtp服务器地址
@@ -146,6 +142,7 @@ EMAIL_HOST_PASSWORD = 'itmeng2018'
 # 收件人看到的发件人
 EMAIL_FROM = '天天生鲜<m19937427455@163.com>'
 
+# TODO 缓存配置
 # Django的缓存配置-Aliyun
 # CACHES = {
 #     "default": {
@@ -167,11 +164,19 @@ CACHES = {
     }
 }
 
-
-
 # 配置session存储
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 # 配置登录url地址
 LOGIN_URL = '/user/login/'
+
+# 配置Django的文件存储类
+DEFAULT_FILE_STORAGE = 'utils.fdfs.storage.FDFSStorage'
+
+# TODO 配置FastDFS
+# 调用client.conf文件的路径
+FDFS_CLIENT_CONF = './utils/fdfs/client.conf'
+
+# FastDFS服务器ip:端口
+FDFS_URL = 'http://192.168.154.129:8888/'
