@@ -92,17 +92,18 @@ WSGI_APPLICATION = 'dailyfresh.wsgi.application'
 #     }
 # }
 
-# 本机
+# work_ubuntu
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dailyfresh',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.154.129',
         'USER': 'root',
         'PASSWORD': 'mengfei',
         'PORT': 3306,
     }
 }
+
 
 # django 认证系统使用的模型类
 AUTH_USER_MODEL = 'user.User'
@@ -145,16 +146,28 @@ EMAIL_HOST_PASSWORD = 'itmeng2018'
 # 收件人看到的发件人
 EMAIL_FROM = '天天生鲜<m19937427455@163.com>'
 
-# Django的缓存配置
+# Django的缓存配置-Aliyun
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://139.196.137.234:6379/9",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
+# Django的缓存配置-work_ubuntu
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://139.196.137.234:6379/9",
+        "LOCATION": "redis://192.168.154.129:6379/9",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
 }
+
+
 
 # 配置session存储
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"

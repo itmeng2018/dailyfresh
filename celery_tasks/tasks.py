@@ -16,7 +16,8 @@ from django.core.mail import send_mail
 # ------------------------
 
 # 创建一个Celery的实例对象 -- broker: 任务队列(中间人)
-app = Celery('celery_tasks.tasks', broker='redis://139.196.137.234:6379/8')
+# app = Celery('celery_tasks.tasks', broker='redis://139.196.137.234:6379/8')  # aliyun
+app = Celery('celery_tasks.tasks', broker='redis://192.168.154.129:6379/8')  # work_ubuntu
 
 
 # 定义发邮件任务函数
