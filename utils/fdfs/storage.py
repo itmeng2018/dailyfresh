@@ -1,6 +1,6 @@
 from django.core.files.storage import Storage
-from fdfs_client.client import Fdfs_client
 from django.conf import settings
+from fdfs_client.client import Fdfs_client
 
 
 class FDFSStorage(Storage):

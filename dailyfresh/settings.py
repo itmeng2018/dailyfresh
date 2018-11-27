@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = 'ma*gr$9we&1gipq2-_!f7gs6$a9440lpz-waf_)o(oa4ff$hf9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -77,23 +78,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'dailyfresh.wsgi.application'
 
 # TODO 数据库
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'dailyfresh',
-#         'HOST': '139.196.137.234',
-#         'USER': 'root',
-#         'PASSWORD': 'mengfei',
-#         'PORT': 3306,
-#     }
-# }
+SQL_HOST = '192.168.154.129'  # 虚拟机
+# SQL_HOST = '139.196.137.234'  # 阿里云
 
-# work_ubuntu
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dailyfresh',
-        'HOST': '192.168.154.129',
+        'HOST': SQL_HOST,
         'USER': 'root',
         'PASSWORD': 'mengfei',
         'PORT': 3306,
@@ -102,9 +94,6 @@ DATABASES = {
 
 # django 认证系统使用的模型类
 AUTH_USER_MODEL = 'user.User'
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.8/topics/i18n/
 
 LANGUAGE_CODE = 'zh-hans'
 
@@ -115,9 +104,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
@@ -141,23 +127,18 @@ EMAIL_HOST_USER = 'm19937427455@163.com'
 EMAIL_HOST_PASSWORD = 'itmeng2018'
 # 收件人看到的发件人
 EMAIL_FROM = '天天生鲜<m19937427455@163.com>'
+# 激活服务器url
+EMAIL_ACTIVE = 'http://127.0.0.0:8000/'
 
 # TODO 缓存配置
-# Django的缓存配置-Aliyun
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "redis://139.196.137.234:6379/9",
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#         }
-#     }
-# }
-# Django的缓存配置-work_ubuntu
+CACHE_REDIS = 'redis://192.168.154.129:6379'  # work_ubuntu
+# CACHE_REDIS = 'redis://139.196.137.234:6379'  # aliyun
+
+# Django的缓存配置
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://192.168.154.129:6379/9",
+        "LOCATION": "%s/9" % CACHE_REDIS,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -175,8 +156,8 @@ LOGIN_URL = '/user/login/'
 DEFAULT_FILE_STORAGE = 'utils.fdfs.storage.FDFSStorage'
 
 # TODO 配置FastDFS
-# 调用client.conf文件的路径
-FDFS_CLIENT_CONF = './utils/fdfs/client.conf'
-
 # FastDFS服务器ip:端口
 FDFS_URL = 'http://192.168.154.129:8888/'
+
+# 调用client.conf文件的路径
+FDFS_CLIENT_CONF = './utils/fdfs/client.conf'
