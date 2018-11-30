@@ -2,61 +2,33 @@
 
 ### 一. 项目架构
 
-![项目架构](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/项目架构.png)
+![项目架构](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/01-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1.png)
 
-### 二. 模块设计
+### 二. 页面设计
 
-- 用户模块
-- 商品模块
-- 购物车模块
-- 订单模块
-- 后台模块
+![页面设计](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/02-%E9%A1%B5%E9%9D%A2%E8%AE%BE%E8%AE%A1.png)
 
-### 三. 数据库设计
+### 三. 功能设计
+![功能设计](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/03-%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1.png)
 
-![数据库设计-大](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/数据库设计-大.png)
+### 四. 数据库设计
 
-![数据库设计](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/数据库设计.png)
+![数据库设计-大](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/04-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1-%E5%A4%A7.png)
 
-### 四. 页面设计
+![数据库设计](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/04-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1.png)
 
-![页面设计](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/页面设计.png)
+### 五. celery
 
-### 五. 功能设计
+![celery](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/05-celery.png)
 
-![功能设计](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/功能设计.png)
+### 六. FastDFS
 
-### 六. 开发环境
+![FastDFS](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/06-fastDFS.png)
 
-1. 操作系统: MacOS 10.14.1
+### 七. 服务器部署
 
-2. python3.5.6
+![服务器](https://github.com/itmeng2018/dailyfresh/blob/master/rede_image/07-%E6%9C%8D%E5%8A%A1%E5%99%A8.png)
 
-3. 模块版本
-
-   > django==1.8.19
-   >
-   > pymysql==0.9.2
-   >
-   > redis==2.10.6
-   >
-   > django-redis==4.10.0
-   >
-   > django-redis-sessions==0.5.6
-   >
-   > django-tinymce==2.6.0
-   >
-   > itsdangerous==1.1.0
-   >
-   > pillow==5.3.0
-   >
-   > celery==4.2.1
-
- ### 七. 服务器环境
-
-    1. 操作系统 Ubuntu16.04 LTS
-    2. 服务端 Nginx + uwsgi + python3.5.6
-    3. mysql + redis + FastDFS + django
 
 ### 八. 开发计划
 
@@ -86,5 +58,5 @@
     7. 购物车redis-hash   历史记录redis-list
     8. 前段用ajax-post请求后端接口
     9. 高并发的库存问题(悲观锁, 乐观锁)
-    10. 订单支付, 支付宝接口
+    10. 订单支付, 支付宝接口 -- <未实现>
 
