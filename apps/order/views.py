@@ -115,7 +115,6 @@ class OrderCommitView(View):
             return JsonResponse({'res': 3, 'errmsg': '地址非法'})
 
         # todo: 创建订单核心业务
-
         # 组织参数
         # 订单id: 20171122181630+用户id
         order_id = datetime.now().strftime('%Y%m%d%H%M%S') + str(user.id)
@@ -128,13 +127,15 @@ class OrderCommitView(View):
         total_price = 0
 
         # todo: 向df_order_info表中添加一条记录
-        order = OrderInfo.objects.create(order_id=order_id,
-                                         user=user,
-                                         addr=addr,
-                                         pay_method=pay_method,
-                                         total_count=total_count,
-                                         total_price=total_price,
-                                         transit_price=transit_price)
+        order = OrderInfo.objects.create(
+            order_id=order_id,
+            user=user,
+            addr=addr,
+            pay_method=pay_method,
+            total_count=total_count,
+            total_price=total_price,
+            transit_price=transit_price
+        )
 
         # todo: 用户的订单中有几个商品，需要向df_order_goods表中加入几条记录
         conn = get_redis_connection('default')
@@ -153,10 +154,12 @@ class OrderCommitView(View):
             count = conn.hget(cart_key, sku_id)
 
             # todo: 向df_order_goods表中添加一条记录
-            OrderGoods.objects.create(order=order,
-                                      sku=sku,
-                                      count=count,
-                                      price=sku.price)
+            OrderGoods.objects.create(
+                order=order,
+                sku=sku,
+                count=count,
+                price=sku.price
+            )
 
             # todo: 更新商品的库存和销量
             sku.stock -= int(count)

@@ -14,6 +14,9 @@ class User(AbstractUser, BaseModel):
         verbose_name = '用户'
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.name
+
 
 class AddressManager(models.Manager):
     '''地址模型管理器类'''
